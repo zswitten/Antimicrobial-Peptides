@@ -8,5 +8,7 @@ This repository contains:
     * These models predict [MIC](https://en.wikipedia.org/wiki/Minimum_inhibitory_concentration) for a given peptide using the sequence of amino acids in the peptide.
     * Additional code in the notebook generates sequences and uses simulated annealing to find sequences with good (low) predicted MIC.
     * Two especially low-MIC-predicted sequences were experimentally verified to have low MIC in vitro.
+    
+* In `Model_comparison.ipynb`, code for comparing different regression models (different neural network architectures, ridge, and kNN regression).
 
 * In `Hemolysis`, unfinished work pointing in the direction of predicting toxicity of a peptide from its amino acid sequence.
