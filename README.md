@@ -8,7 +8,7 @@ _strain_: the strain of bacterium, when available.
 - _value_: the MIC of the peptide on the bacterium.
 - _database_: the database from which the row's information was scraped.
 
-The database also contains the following columns:
+The database also contains the following auxiliary columns:
 - _modifications_: modifications that have been applied to the sequence.
 - _unit_: the unit of measurement of MIC, always uM.
 - _url_source_: a link to the database page from which the row's information was scraped.
