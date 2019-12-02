@@ -1,6 +1,6 @@
-### Antimicrobial-Peptides
+# Antimicrobial-Peptides
 
-# Data
+## Data
 [GRAMPA](https://github.com/zswitten/Antimicrobial-Peptides/blob/master/data/grampa.csv) is a database of peptides and their antimicrobial activity against various bacteria. The database contains the following key columns:
 _bacterium_: the target bacterium.
 _sequence_: the sequence of amino acids that make up the peptide.
@@ -17,7 +17,7 @@ _has_unusual_modification_: a binary column stating whether or not the sequence 
 _has_cterminal_amidation_: a binary column stating whether or not the sequence was modified with c-terminal amidation.
 _datasource_has_modifications_: a column stating whether the database for that row contained modification information. When this column is False, the sequence may have been modified irrespective of the value of `is_modified`.
 
-# Analysis
+## Analysis
 
 * In `data`, notebooks for scraping, preprocessing, and cleaning data from several databases of AMP information.
     * And the data itself, as scraped in April 2018.
