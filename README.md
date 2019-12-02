@@ -1,7 +1,7 @@
 # Antimicrobial-Peptides
 
 ## Data
-[GRAMPA](https://github.com/zswitten/Antimicrobial-Peptides/blob/master/data/grampa.csv) is a database of peptides and their antimicrobial activity against various bacteria. The database contains the following key columns:
+GRAMPA [(link to csv file)](https://github.com/zswitten/Antimicrobial-Peptides/blob/master/data/grampa.csv) is a database of peptides and their antimicrobial activity against various bacteria. The database contains the following key columns:
 - _bacterium_: the target bacterium.
 - _sequence_: the sequence of amino acids that make up the peptide.
 _strain_: the strain of bacterium, when available.
