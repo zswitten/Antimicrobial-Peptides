@@ -28,6 +28,8 @@ def generate_random_sequence(min_length=5, max_length=MAX_SEQUENCE_LENGTH, fixed
     return sequence
 
 def add_random_negative_examples(vectors, labels, negatives_ratio):
+    if negatives_ratio == 0:
+        return vectors, labels
     num_negative_vectors = int(negatives_ratio * len(vectors))
     negative_vectors = np.array(
         [sequence_to_vector(generate_random_sequence()) for _ in range(num_negative_vectors)]
@@ -60,7 +62,7 @@ def uniprot_precision(model):
         except KeyError:
             continue
     preds = model.predict(np.array(vectors))
-    false_positives = len([p for p in preds if p >= MAX_MIC - max_mic_buffer])
+    false_positives = len([p for p in preds if p < MAX_MIC - max_mic_buffer])
     return 1 - false_positives / len(negatives)
 
 
