@@ -1,5 +1,7 @@
 # Antimicrobial-Peptides
 
+Data and code for [Deep learning regression model for antimicrobial peptide design](https://www.biorxiv.org/content/10.1101/692681v1.full). This repository contains code for training a model to predict antimicrobial activity of peptides against various bacteria including E. coli and P. aeruginosa.
+
 ## Data
 GRAMPA [(link to csv file)](https://github.com/zswitten/Antimicrobial-Peptides/blob/master/data/grampa.csv) is a database of peptides and their antimicrobial activity against various bacteria. The database contains the following key columns:
 - _bacterium_: the target bacterium.
@@ -17,13 +19,14 @@ The database also contains the following auxiliary columns:
 - _has_cterminal_amidation_: a binary column stating whether or not the sequence was modified with c-terminal amidation.
 - _datasource_has_modifications_: a column stating whether the database for that row contained modification information. When this column is False, the sequence may have been modified irrespective of the value of `is_modified`.
 
-## Analysis
+## Training a model
+To train a model for E. coli that has a 1:1 ratio of random negative examples and runs for 60 epochs: 
 
-* In `MIC_Prediction.ipynb`, code for loading the data, doing some exploratory analysis, and then training deep learning models.
-    * These models predict [MIC](https://en.wikipedia.org/wiki/Minimum_inhibitory_concentration) for a given peptide using the sequence of amino acids in the peptide.
-    * Additional code in the notebook generates sequences and uses simulated annealing to find sequences with good (low) predicted MIC.
-    * Two especially low-MIC-predicted sequences were experimentally verified to have low MIC in vitro.
-    
-* In `Model_comparison.ipynb`, code for comparing different regression models (different neural network architectures, ridge, and kNN regression).
+```
+git clone https://github.com/zswitten/Antimicrobial-Peptides/
+cd Antimicrobial-Peptides
+pip install -r requirements.txt
+python src/train_model.py --negatives=1 --bacterium='E. coli' --epochs=60
+```
 
-* In `Hemolysis`, unfinished work pointing in the direction of predicting toxicity of a peptide from its amino acid sequence.
+[This notebook](https://github.com/zswitten/Antimicrobial-Peptides/blob/master/MIC_Prediction.ipynb) contains code for reproducing the figures in the paper.
