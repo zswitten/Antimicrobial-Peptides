@@ -23,7 +23,7 @@ The database also contains the following auxiliary columns:
 To train a model for E. coli that has a 1:1 ratio of random negative examples and runs for 60 epochs: 
 
 ```
-git clone https://github.com/zswitten/Antimicrobial-Peptides/
+git clone git@github.com:zswitten/Antimicrobial-Peptides.git
 cd Antimicrobial-Peptides
 pip install -r requirements.txt
 python src/train_model.py --negatives=1 --bacterium='E. coli' --epochs=60
