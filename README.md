@@ -6,12 +6,12 @@ GRAMPA [(link to csv file)](https://github.com/zswitten/Antimicrobial-Peptides/b
 - _sequence_: the sequence of amino acids that make up the peptide.
 _strain_: the strain of bacterium, when available.
 - _value_: the MIC of the peptide on the bacterium.
-- _database_: the database from which the row's information was scraped.
 
 The database also contains the following auxiliary columns:
+- _database_: the database from which the row's information was scraped.
+- _url_source_: a link to the database page from which the row's information was scraped.
 - _modifications_: modifications that have been applied to the sequence.
 - _unit_: the unit of measurement of MIC, always uM.
-- _url_source_: a link to the database page from which the row's information was scraped.
 - _is_modified_: a binary column stating whether or not the sequence was modified.
 - _has_unusual_modification_: a binary column stating whether or not the sequence was modified in any way other than by c-terminal amidation.
 - _has_cterminal_amidation_: a binary column stating whether or not the sequence was modified with c-terminal amidation.
@@ -19,9 +19,6 @@ The database also contains the following auxiliary columns:
 
 ## Analysis
 
-* In `data`, notebooks for scraping, preprocessing, and cleaning data from several databases of AMP information.
-    * And the data itself, as scraped in April 2018.
-  
 * In `MIC_Prediction.ipynb`, code for loading the data, doing some exploratory analysis, and then training deep learning models.
     * These models predict [MIC](https://en.wikipedia.org/wiki/Minimum_inhibitory_concentration) for a given peptide using the sequence of amino acids in the peptide.
     * Additional code in the notebook generates sequences and uses simulated annealing to find sequences with good (low) predicted MIC.
