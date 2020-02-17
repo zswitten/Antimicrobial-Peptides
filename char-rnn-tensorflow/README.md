@@ -1,3 +1,11 @@
+Code comes from https://github.com/sherjilozair/char-rnn-tensorflow, which in turn is adapted from https://github.com/karpathy/char-rnn.
+
+Train a model to generate text that looks like data/peptides/input.txt and save it in yourdirectory:
+`python train.py --data_dir=./data/peptides/ --save_dir=yourdirectory`
+
+Sample N characters of text from that model and store it in suggested_peptides.txt:
+`python sample.py --save_dir=yourdirectory -n=N >> suggested_peptides.txt`
+
 char-rnn-tensorflow
 ===
 
