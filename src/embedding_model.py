@@ -71,11 +71,19 @@ def make_PCA_plot(species_embeddings,species_tags,colors):
 
 def generate_pca_plot_from_data(amp_data,embed_dim=10):
 	# Generates species embeddings based on the entire dataset (rather than a training test split, as this isn't really a training/test sort of thing)
+	amp_data = amp_data[[
+	    'bacterium', 'modifications', 'is_modified', 'value', 'sequence', 'datasource_has_modifications',
+	    'has_unusual_modification'
+	]]
+	amp_data = amp_data[amp_data.has_unusual_modification == False]
+	amp_data = amp_data[amp_data['datasource_has_modifications'] == True]
+	amp_data = amp_data.groupby(['bacterium', 'sequence']).mean().reset_index()
+
 	amp_data = amp_data[amp_data.bacterium.isin(amp_data.bacterium.value_counts().head(50).index)]
 	amp_data.loc[:, 'bacterium_id'] = amp_data.bacterium.astype('category').cat.codes
 	amp_data.loc[:,'bacterium_cat'] = amp_data.bacterium.astype('category')
 	cat_dict = dict(enumerate(amp_data['bacterium_cat'].cat.categories))
-	early_stopping = EarlyStopping(monitor = 'val_loss', patience = 5)
+	early_stopping = EarlyStopping(monitor = 'val_loss', patience = 15)
 	bacterium_to_cat_id = {}
 	for key in cat_dict:
 	    bacterium_to_cat_id[cat_dict[key]]=key
