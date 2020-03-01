@@ -13,11 +13,14 @@ from sklearn.decomposition import PCA
 from sklearn import preprocessing
 from make_dataset import AMPDataset, CPPDataset, HemolysisDataset
 from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
 
 def conv_model_species_embedding(shape=[50,20],n_species=50,embed_dim=10):
 	# Input should be [x0,x1] where the first x value is a sequence vector, and the second is an integer representing the bacterium_id
 	# (See beginning of generate_pca_plot_from_data method for application of predictions)
+	# NOTE: shuffling the data before training one of these models is VERY IMPORTANT (see the line x0,x1,y = shuffle(x0,x1,y) below)
+	# If the data is not shuffled than the performance will be worse and the embeddings will be disrupted
     sequence_input = Input(
         shape=shape
     )
@@ -94,16 +97,13 @@ def generate_pca_plot_from_data(amp_data,embed_dim=10):
 	# Categorical input format for an embedding layer
 	x1 = amp_data.reset_index()['bacterium_id']
 	y = amp_data.value.values
+	x0,x1,y = shuffle(x0,x1,y)
 
 	
 	model_embed = conv_model_species_embedding(shape=x0.shape[1:],n_species=len(amp_data.bacterium_id.value_counts()),embed_dim=embed_dim)
-	
-	# Compare this (removing 25% of the data!!!)
-	train_x0, test_x0, train_x1, test_x1, train_y, test_y = train_test_split(x0, x1, y,test_size=0.25)
-	model_embed.fit([train_x0,train_x1],train_y,epochs=40,validation_split=0.1,callbacks=[early_stopping])
 
 	# To this: using the entire dataset
-	# model_embed.fit([x0,x1],y,epochs=40,validation_split=0.1,callbacks=[early_stopping])
+	model_embed.fit([x0,x1],y,epochs=40,validation_split=0.1,callbacks=[early_stopping])
 
 	embedding_layer = model_embed.layers[9]
 	# Embeddings of top 10 species by amount of data, plus ESKAPE pathogens
