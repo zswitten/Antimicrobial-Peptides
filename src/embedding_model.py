@@ -73,8 +73,8 @@ def make_PCA_plot(species_embeddings,species_tags,colors):
 	plt.savefig('../species_embeddings.png')
 	plt.show()
 
-def compare_multispecies_to_single_species_training(species,test_size=0.25):
-	amp_data = get_amp_data_training_set()
+def compare_multispecies_to_single_species_training(species,test_size=0.25,include_human=False):
+	amp_data = get_amp_data_training_set(include_hemolysis=include_human)
 	early_stopping = EarlyStopping(monitor = 'val_loss', patience = 15)
 
 	amp_test_data = amp_data[0:int(len(amp_data)*test_size)]
@@ -144,7 +144,8 @@ def get_amp_data_training_set(include_hemolysis=False):
 	amp_data = amp_data[amp_data.bacterium.isin(amp_data.bacterium.value_counts().head(50).index)]
 	amp_data.loc[:, 'bacterium_id'] = amp_data.bacterium.astype('category').cat.codes
 	amp_data.loc[:,'bacterium_cat'] = amp_data.bacterium.astype('category')
-	return amp_data.sample(frac=1).reset_index(drop=True)
+	amp_data=amp_data.sample(frac=1).reset_index(drop=True)
+	return amp_data
 
 
 def generate_pca_plot_from_data(embed_dim=10,include_human=False):
@@ -198,6 +199,6 @@ def generate_pca_plot_from_data(embed_dim=10,include_human=False):
 
 # generate_pca_plot_from_data(include_human=True)
 
-compare_multispecies_to_single_species_training('P. aeruginosa')
+compare_multispecies_to_single_species_training('H. sapiens',include_human=True)
 
 
