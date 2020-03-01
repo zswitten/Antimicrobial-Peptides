@@ -14,6 +14,8 @@ from sklearn import preprocessing
 from make_dataset import AMPDataset, CPPDataset, HemolysisDataset
 
 def conv_model_species_embedding(shape=[50,20],n_species=50,embed_dim=10):
+	# Input should be [x0,x1] where the first x value is a sequence vector, and the second is an integer representing the bacterium_id
+	# (See beginning of generate_pca_plot_from_data method for application of predictions)
     sequence_input = Input(
         shape=shape
     )
@@ -80,10 +82,10 @@ def generate_pca_plot_from_data(amp_data,embed_dim=10):
 	
 	x0 = np.array([sequence_to_vector(s) for s in amp_data['sequence'].values])
 	# Categorical input format for an embedding layer
-	x2 = amp_data.reset_index()['bacterium_id']
+	x1 = amp_data.reset_index()['bacterium_id']
 	y = amp_data.value.values
 	model_embed = conv_model_species_embedding(shape=x0.shape[1:],n_species=len(amp_data.bacterium_id.value_counts()),embed_dim=embed_dim)
-	model_embed.fit([x0,x2],y,epochs=40,validation_split=0.1,callbacks=[early_stopping])
+	model_embed.fit([x0,x1],y,epochs=40,validation_split=0.1,callbacks=[early_stopping])
 
 	embedding_layer = model_embed.layers[9]
 	# Embeddings of top 10 species by amount of data, plus ESKAPE pathogens
