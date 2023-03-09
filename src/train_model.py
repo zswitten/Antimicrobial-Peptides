@@ -1,6 +1,6 @@
-from src.load_data import load_df_from_dbs
-from src.nn import conv_model, evaluate, evaluate_as_classifier
-from src.settings import MAX_SEQUENCE_LENGTH, character_to_index, CHARACTER_DICT, max_mic_buffer, MAX_MIC
+from load_data import load_df_from_dbs
+from nn import conv_model, evaluate, evaluate_as_classifier
+from settings import MAX_SEQUENCE_LENGTH, character_to_index, CHARACTER_DICT, max_mic_buffer, MAX_MIC
 
 from sklearn.model_selection import train_test_split
 import numpy as np

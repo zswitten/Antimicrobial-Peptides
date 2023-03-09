@@ -6,7 +6,7 @@ from sklearn.model_selection import cross_val_score
 import json
 from keras.models import model_from_json
 import numpy as np
-from src.settings import MAX_SEQUENCE_LENGTH, MAX_MIC, character_to_index, max_mic_buffer
+from settings import MAX_SEQUENCE_LENGTH, MAX_MIC, character_to_index, max_mic_buffer
 
 def conv_model():
     model = keras.models.Sequential()
