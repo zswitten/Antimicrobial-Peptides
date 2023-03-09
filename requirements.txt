@@ -3,7 +3,7 @@ biopython==1.75
 sklearn==0.0
 Keras==2.6
 h5py==3.1.0
-numpy==1.19.2
+numpy==1.22.0
 six==1.15.0
 testresources==2.0.1
 tensorflow==2.9.3
