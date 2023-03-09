@@ -6,4 +6,4 @@ h5py==3.1.0
 numpy==1.19.2
 six==1.15.0
 testresources==2.0.1
-tensorflow==2.6.0
+tensorflow==2.9.3
